@@ -11,5 +11,6 @@ def solve(A, n=10):
         np.ndarray: The solution vector x.
     """
 
-    eigenvalues, eigenvectors = sp.sparse.linalg.eigs(A, k=n, which='SM')
+    eigenvalues, eigenvectors = sp.sparse.linalg.eigsh(A, k=n, which='SM')
+
     return eigenvalues, eigenvectors

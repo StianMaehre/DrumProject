@@ -2,7 +2,7 @@ import numpy as np
 import scipy.sparse as sp
 import math
 
-from matplotlib import Path
+from matplotlib.path import Path
 
 def makeKochLine(startX, startY, endX, endY):
     """
@@ -77,10 +77,15 @@ def makeKochSquareStep(points):
 def makeKochSquare(L, level):
     """
     Create a Koch square of size L and level of detail.
-    """
-    if level < 0:
-        raise ValueError("Level must be non-negative.")
+
+    Args:
+        L (float): The length of the Koch square at level 0.
+        level (int): The level of detail for the Koch square.
     
+    Returns:
+        numpy.ndarray: An array of points representing the Koch square.
+    """
+
     points = np.zeros((5, 2))
 
     points[0] = 0, 0
@@ -95,7 +100,7 @@ def makeKochSquare(L, level):
     return points
 
 def isInsideKochSquare(point, kochSquare):
-    """Check if a point is inside the Koch square.
+    """Check if a point is inside the Koch square, by using the Path.contains_point method from matplotlib.
 
     Args:
         point (tuple): A tuple (x, y) representing the point to check.
@@ -160,11 +165,7 @@ def CalculateLl(L, level):
     Returns:
         float: The length of the Koch curve at the specified level.
     """ 
-
-    if level < 0:
-        print("Error: Level must be non-negative.")
-        return None
-    
+ 
     Ll = 1
     for i in range(1, level + 1):
         Ll += 2 * 4**(-i)
@@ -186,7 +187,6 @@ def initialize(L, level, levelMin=2):
     """
 
     # Create Koch square
-
     if level < levelMin:
         a = L / (4**levelMin)
 
@@ -202,7 +202,7 @@ def initialize(L, level, levelMin=2):
     # Create a grid of points
     X = np.linspace(- start, end, N)
     Y = np.linspace(- start, end, N)
-    kochSquare = makeKochSquare(Ll, level)
+    kochSquare = makeKochSquare(L, level)
     interior = np.zeros((N, N), dtype=bool)
 
     # Check which points are inside the Koch square
