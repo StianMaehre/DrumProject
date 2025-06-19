@@ -3,6 +3,7 @@ import scipy.sparse as sp
 import math
 
 from matplotlib.path import Path
+from config import MINIMUM_RESOLUTION_LEVEL
 
 def makeKochLine(startX, startY, endX, endY):
     """
@@ -172,7 +173,7 @@ def CalculateLl(L, level):
 
     return Ll * L
 
-def initialize(L, level, levelMin=2):
+def initialize(L, level):
     """Initialize the Koch square and the finite difference matrix.
     Args:
         L (float): The length of the Koch square at level 0.
@@ -187,8 +188,8 @@ def initialize(L, level, levelMin=2):
     """
 
     # Create Koch square
-    if level < levelMin:
-        a = L / (4**levelMin)
+    if level < MINIMUM_RESOLUTION_LEVEL:
+        a = L / (4**MINIMUM_RESOLUTION_LEVEL)
 
     else:
         a = L / (4**level)
