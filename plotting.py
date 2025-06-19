@@ -1,5 +1,7 @@
 import numpy as np
 import matplotlib.pyplot as plt
+import os
+import sys
 
 from matplotlib.colors import CenteredNorm
 
@@ -23,13 +25,19 @@ def plotSolution(mode, kochSquare, Ll, L, title):
     plt.colorbar(label='Amplitude')
     plt.axis("off")
     try:
-        plt.savefig(f"./plots/{title}.png", bbox_inches='tight')
+        plt.savefig(f"./plots/{title}.pdf", bbox_inches='tight')
     except FileNotFoundError:
         print("Directory 'plots' does not exist. Please create it to save the plots.")
-    plt.show()
+    
+    if sys.platform.startswith("win"):
+        plt.show()
+    elif os.environ.get('DISPLAY', '') == '':
+        print(f"No display found, unable to show the plot f{title}.")
+    else:
+        plt.show()
     
 
-def plotEigenvalues(eigenvalues, eigenvectors, kochSquare, Ll, L):
+def plotEigenvalues(eigenvalues, eigenvectors, kochSquare, level, Ll, L):
     """Plot the eigenvalues and their corresponding eigenvectors.
     Args:
         eigenvalues (np.ndarray): The eigenvalues of the system.
@@ -41,6 +49,6 @@ def plotEigenvalues(eigenvalues, eigenvectors, kochSquare, Ll, L):
     n = len(eigenvalues)
     N = int(np.sqrt(len(eigenvectors[:, 0])))
     for i in range(n):
-        title = f"Eigenvalue {i + 1}: {eigenvalues[i]:.2f}"
+        title = f"Eigenvalue_{i + 1}_level_{level}"
         mode = eigenvectors[:, i].reshape((N, N))
         plotSolution(mode, kochSquare, Ll, L, title)

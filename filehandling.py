@@ -1,8 +1,15 @@
 import numpy as np
+import os
 
 def writeSolutionToFile(eigenvalues, eigenvectors, kochSquare, level, Ll, L):
     """Write the eigenvalues and eigenvectors to a file."""
-    print("Her")
+
+    base_dir = os.path.dirname(os.path.abspath(__file__))
+    results_dir = os.path.join(base_dir, "results")
+    if not os.path.exists(results_dir):
+        os.makedirs(results_dir)
+
+    filename = os.path.join(results_dir, f"Solution{level}.pkl")
     with open(f"./results/Solution{level}.pkl", "wb") as f:
         data = {
             "eigenvalues": eigenvalues,

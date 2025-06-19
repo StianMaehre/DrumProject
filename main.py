@@ -28,7 +28,7 @@ def main():
 
     if action == "initialize and solve":
         print(f"Level: {level}, Length: {L}")
-        print("Initializing the Koch square and solving the system...")
+        print("Initializing the system...")
         starttime = time.time()
         A, kochSquare, Ll, L = initialize(L, level)
         print(f"Initialization took {time.time() - starttime:.2f} seconds.")
@@ -47,12 +47,12 @@ def main():
         if eigenvalues is None or eigenvectors is None:
             print("No solution found. Please run the initialization and solving first.")
         else:
-            plotEigenvalues(eigenvalues, eigenvectors, kochSquare, Ll, L)
+            plotEigenvalues(eigenvalues, eigenvectors, kochSquare, level, Ll, L)
             print("Plotting completed successfully.")
     
     elif action == "all":
         print(f"Level: {level}, Length: {L}")
-        print("Initializing the Koch square and solving the system...")
+        print("Initializing the system...")
         starttime = time.time()
         A, kochSquare, Ll, L = initialize(L, level)
         print(f"Initialization took {time.time() - starttime:.2f} seconds.")
@@ -63,11 +63,11 @@ def main():
         print(f"Solving took {time.time() - starttime:.2f} seconds.")
 
         print("Writing solution to file...")
-        writeSolutionToFile(eigenvalues, eigenvectors, kochSquare, level, Ll, L)
+        #writeSolutionToFile(eigenvalues, eigenvectors, kochSquare, level, Ll, L)
         print("Solution written to file successfully.")
 
         print("Plotting the eigenvalues and eigenvectors...")
-        plotEigenvalues(eigenvalues, eigenvectors, kochSquare, Ll, L)
+        plotEigenvalues(eigenvalues, eigenvectors, kochSquare, level, Ll, L)
         print("Plotting completed successfully.")
 
 def Argparser():
