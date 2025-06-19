@@ -1,15 +1,33 @@
 import numpy as np
 import os
 
+def getFullFilepath(filename, subdir, makeNewDir) -> str:
+    """
+    Return the full path to a results file in the specified subdirectory.
+
+    Args:
+        filename (str): filname to be saved
+        subdir (str): Name of the subdirectory where the file will be saved.
+
+    Returns:
+        str: Full path to the results file.
+    """
+    base_dir = os.path.dirname(os.path.abspath(__file__))
+    target_dir = os.path.join(base_dir, subdir)
+    if not os.path.exists(subdir):
+        if makeNewDir:
+            print(f"Creating directory: {subdir}")
+            os.makedirs(subdir)
+        else:
+            raise NotADirectoryError(f"{subdir} is not a directory.")
+    
+    os.makedirs(target_dir, exist_ok=True)
+    return os.path.join(target_dir, filename)
+
 def writeSolutionToFile(eigenvalues, eigenvectors, kochSquare, level, Ll, L):
     """Write the eigenvalues and eigenvectors to a file."""
 
-    base_dir = os.path.dirname(os.path.abspath(__file__))
-    results_dir = os.path.join(base_dir, "results")
-    if not os.path.exists(results_dir):
-        os.makedirs(results_dir)
-
-    filename = os.path.join(results_dir, f"Solution{level}.pkl")
+    filename = getFullFilepath(f"Solution{level}.pkl", "results", True)
     with open(filename, "wb") as f:
         data = {
             "eigenvalues": eigenvalues,
@@ -24,12 +42,8 @@ def writeSolutionToFile(eigenvalues, eigenvectors, kochSquare, level, Ll, L):
 
 def readSolutionFromFile(level):
     """Read the eigenvalues and eigenvectors from a file."""
-    base_dir = os.path.dirname(os.path.abspath(__file__))
-    results_dir = os.path.join(base_dir, "results")
-    if not os.path.exists(results_dir):
-        os.makedirs(results_dir)
 
-    filename = os.path.join(results_dir, f"Solution{level}.pkl")
+    filename = getFullFilepath(f"Solution{level}.pkl", "results", False)
 
     if not os.path.exists(filename):
         raise FileNotFoundError(f"File ./results/Solution{level}.pkl not found. Please run the initialization and solving first.")

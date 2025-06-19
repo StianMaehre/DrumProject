@@ -32,12 +32,13 @@ def main():
         print("Initializing the system...")
         starttime = time.time()
         A, kochSquare, Ll, L = initialize(L, level)
-        print(f"Initialization took {time.time() - starttime:.2f} seconds.")
+        print(f"Initialization took {time.time() - starttime:.2f} seconds.\n")
 
         print("Solving the system...")
         starttime = time.time()
         eigenvalues, eigenvectors = solve(A)
-        print(f"Solving took {time.time() - starttime:.2f} seconds.")
+        print(f"Solving took {time.time() - starttime:.2f} seconds.\n")
+        
         print("Writing solution to file...")
         writeSolutionToFile(eigenvalues, eigenvectors, kochSquare, level, Ll, L)
         print("Solution written to file successfully.")
@@ -56,16 +57,16 @@ def main():
         print("Initializing the system...")
         starttime = time.time()
         A, kochSquare, Ll, L = initialize(L, level)
-        print(f"Initialization took {time.time() - starttime:.2f} seconds.")
+        print(f"Initialization took {time.time() - starttime:.2f} seconds. \n")
 
         print("Solving the system...")
         starttime = time.time()
         eigenvalues, eigenvectors = solve(A)
-        print(f"Solving took {time.time() - starttime:.2f} seconds.")
+        print(f"Solving took {time.time() - starttime:.2f} seconds.\n")
 
         print("Writing solution to file...")
         #writeSolutionToFile(eigenvalues, eigenvectors, kochSquare, level, Ll, L)
-        print("Solution written to file successfully.")
+        print("Solution written to file successfully.\n")
 
         print("Plotting the eigenvalues and eigenvectors...")
         plotEigenvalues(eigenvalues, eigenvectors, kochSquare, level, Ll, L)
