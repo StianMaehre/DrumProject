@@ -10,7 +10,7 @@ def writeSolutionToFile(eigenvalues, eigenvectors, kochSquare, level, Ll, L):
         os.makedirs(results_dir)
 
     filename = os.path.join(results_dir, f"Solution{level}.pkl")
-    with open(f"./results/Solution{level}.pkl", "wb") as f:
+    with open(filename, "wb") as f:
         data = {
             "eigenvalues": eigenvalues,
             "eigenvectors": eigenvectors,
@@ -24,16 +24,22 @@ def writeSolutionToFile(eigenvalues, eigenvectors, kochSquare, level, Ll, L):
 
 def readSolutionFromFile(level):
     """Read the eigenvalues and eigenvectors from a file."""
-    try:
-        with open(f"./results/Solution{level}.pkl", "rb") as f:
-            data = np.load(f, allow_pickle=True)
-            eigenvalues = data['eigenvalues']
-            eigenvectors = data['eigenvectors']
-            kochSquare = data['kochSquare']
-            Ll = data['Ll']
-            L = data['L']
-            return eigenvalues, eigenvectors, kochSquare, Ll, L
-        
-    except FileNotFoundError:
-        print(f"File ./results/Solution{level}.pkl not found. Please run the initialization and solving first.")
-        return None, None, None, None
+    base_dir = os.path.dirname(os.path.abspath(__file__))
+    results_dir = os.path.join(base_dir, "results")
+    if not os.path.exists(results_dir):
+        os.makedirs(results_dir)
+
+    filename = os.path.join(results_dir, f"Solution{level}.pkl")
+
+    if not os.path.exists(filename):
+        raise FileNotFoundError(f"File ./results/Solution{level}.pkl not found. Please run the initialization and solving first.")
+    
+    with open(f"./results/Solution{level}.pkl", "rb") as f:
+        data = np.load(f, allow_pickle=True)
+        eigenvalues = data['eigenvalues']
+        eigenvectors = data['eigenvectors']
+        kochSquare = data['kochSquare']
+        Ll = data['Ll']
+        L = data['L']
+        return eigenvalues, eigenvectors, kochSquare, Ll, L
+    
