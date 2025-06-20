@@ -26,7 +26,7 @@ def plotSolution(mode, kochSquare, Ll, L, title):
     plt.colorbar(label='Amplitude')
     plt.axis("off")
     
-    filename = getFullFilepath(f"{title}.pdf", "plots", True)
+    filename = getFullFilepath(f"{title}.png", "plots", True)
     try:
         plt.savefig(filename, bbox_inches='tight')
     except FileNotFoundError:

@@ -27,7 +27,7 @@ def main():
     level, action = Argparser()
     L = DEFAULT_L
 
-    if action == "initialize and solve":
+    if action == "initializeAndSolve":
         print(f"Level: {level}, Length: {L}")
         print("Initializing the system...")
         starttime = time.time()
@@ -38,7 +38,7 @@ def main():
         starttime = time.time()
         eigenvalues, eigenvectors = solve(A)
         print(f"Solving took {time.time() - starttime:.2f} seconds.\n")
-        
+
         print("Writing solution to file...")
         writeSolutionToFile(eigenvalues, eigenvectors, kochSquare, level, Ll, L)
         print("Solution written to file successfully.")
@@ -65,7 +65,7 @@ def main():
         print(f"Solving took {time.time() - starttime:.2f} seconds.\n")
 
         print("Writing solution to file...")
-        #writeSolutionToFile(eigenvalues, eigenvectors, kochSquare, level, Ll, L)
+        writeSolutionToFile(eigenvalues, eigenvectors, kochSquare, level, Ll, L)
         print("Solution written to file successfully.\n")
 
         print("Plotting the eigenvalues and eigenvectors...")
@@ -75,7 +75,7 @@ def main():
 def Argparser():
     """Parse command line arguments."""
     parser = argparse.ArgumentParser()
-    parser.add_argument("--action", choices=["initializeAndSolve", "plot", "all"], default="all", help="Action to perform: initialize, solve, plot, or all.")
+    parser.add_argument("--action", choices=["initializeAndSolve", "plot", "all"], default="all", help="Action to perform: initialize and solve, plot or all. Default is all")
     parser.add_argument("--level", type=int, default=2, help=f"Level of detail for the Koch curve (0-{MAXIMUM_LEVEL}).")
     args = parser.parse_args()
     return args.level, args.action

@@ -46,7 +46,7 @@ def readSolutionFromFile(level):
     filename = getFullFilepath(f"Solution{level}.pkl", "results", False)
 
     if not os.path.exists(filename):
-        raise FileNotFoundError(f"File ./results/Solution{level}.pkl not found. Please run the initialization and solving first.")
+        raise FileNotFoundError(f"File ./results/Solution{level}.pkl not found. Please run the initialization and solving first for level: {level}.")
     
     with open(f"./results/Solution{level}.pkl", "rb") as f:
         data = np.load(f, allow_pickle=True)

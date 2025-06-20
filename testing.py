@@ -64,7 +64,7 @@ def test_plotting_no_display(monkeypatch, tmp_path):
     arr = np.random.rand(10, 10)
     koch = np.array([[0,0],[1,0],[1,1],[0,1],[0,0]])
     plotSolution(arr, koch, 1, 1, title="test")
-    assert os.path.exists(f"./plots/test.pdf")
+    assert os.path.exists(f"./plots/test.png")
 
 # 6. Test argument parsing
 import subprocess
