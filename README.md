@@ -3,12 +3,12 @@
 ## Background
 Can you hear the shape of a drum? An interesting question which actucally gives a lot of insight to wave dynamic on different domain. This project aims to solve the necessary equation and thereby show visually that you indeed can hear the shape.
 
-The equation govering the modes and eigenvalues of a drum is Helmholtz equation, here written in terms of eigenfrequency $\omega$:
-![Helmholtz](.\figures\Helmholtz.png)
+The equation govering the modes and eigenvalues of a drum is Helmholtz equation, here written in terms of eigenfrequency ω:
+![Helmholtz](./figures/Helmholtz.png)
 
 
 This can be solved numerically by using finite difference method. The discretized version of the equation is: 
-![Discrete](.\figures\dicrete.png)
+![Discrete](./figures/dicrete.png)
 
 Which can be rewritten to matrix form:
 $\\ \textbf{A}U=\lambda U $
