@@ -8,6 +8,10 @@ def getFullFilepath(filename, subdir, makeNewDir) -> str:
     Args:
         filename (str): filname to be saved
         subdir (str): Name of the subdirectory where the file will be saved.
+        makeNewDir (bool): If True, create the subdirectory if it does not exist.
+
+    Raises:
+        NotADirectoryError: If the specified subdirectory does not exist and makeNewDir is False.
 
     Returns:
         str: Full path to the results file.
@@ -25,7 +29,7 @@ def getFullFilepath(filename, subdir, makeNewDir) -> str:
     return os.path.join(target_dir, filename)
 
 def writeSolutionToFile(eigenvalues, eigenvectors, kochSquare, level, Ll, L):
-    """Write the eigenvalues and eigenvectors to a file."""
+    """Write the system and solution to a file."""
 
     filename = getFullFilepath(f"Solution{level}.pkl", "results", True)
     with open(filename, "wb") as f:
@@ -41,7 +45,17 @@ def writeSolutionToFile(eigenvalues, eigenvectors, kochSquare, level, Ll, L):
     print(f"Solution for level {level} written to ./results/Solution{level}.pkl successfully.")
 
 def readSolutionFromFile(level):
-    """Read the eigenvalues and eigenvectors from a file."""
+    """Read the system and soultion from a file.
+
+    Args:   
+        level (int): The level of the solution to read.
+
+    Raises:
+        FileNotFoundError: If the file for the specified level does not exist.
+        
+    Returns:
+        tuple: A tuple containing the eigenvalues, eigenvectors, kochSquare, Ll, and L.
+    """
 
     filename = getFullFilepath(f"Solution{level}.pkl", "results", False)
 

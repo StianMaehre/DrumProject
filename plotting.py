@@ -13,9 +13,6 @@ def plotSolution(mode, kochSquare, Ll, L, title):
         eigenvalue (float): The eigenvalue of the solution.
         eigenvector (np.ndarray): The eigenvector of the solution.
 
-    Returns:
-        None    
-
     """
     start = (Ll - L) / 2
 
@@ -45,8 +42,6 @@ def plotEigenvalues(eigenvalues, eigenvectors, kochSquare, level, Ll, L):
     Args:
         eigenvalues (np.ndarray): The eigenvalues of the system.
         eigenvectors (np.ndarray): The eigenvectors of the system.
-    Returns:
-        None
     """
 
     n = len(eigenvalues)

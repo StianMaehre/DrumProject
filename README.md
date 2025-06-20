@@ -4,12 +4,11 @@
 Can you hear the shape of a drum? An interesting question which actucally gives a lot of insight to wave dynamic on different domain. This project aims to solve the necessary equation and thereby show visually that you indeed can hear the shape.
 
 The equation govering the modes and eigenvalues of a drum is Helmholtz equation, here written in terms of eigenfrequency $\omega$:
-$\\- \nabla^2 U(\bold{x}, \omega) = \frac{\omega^2}{v^2} U(\bold{x}, \omega)  \quad \text{in } \Omega \\$  
-with boundary condtitons:
-$\\U(\bold{x}, \omega) = 0  \quad \text{on } \partial\Omega$ 
+![Helmholtz](.\figures\Helmholtz.png)
+
 
 This can be solved numerically by using finite difference method. The discretized version of the equation is: 
-$ \\ -\frac{1}{h^2}(U_{i + 1, j} + U_{i - 1, j} + U_{i, j + 1} + U_{i, j - 1} - 4U_{i, j}) = \frac{\omega^2}{v^2} U_{i, j} $
+![Discrete](.\figures\dicrete.png)
 
 Which can be rewritten to matrix form:
 $\\ \textbf{A}U=\lambda U $
@@ -31,9 +30,9 @@ This is the way to run the product:
 
 Without any arguments, the project will initialize, solve, save the raw data, plot and save the plots for a koch square with level 3.
 
-To solve for a system with a koch square on another level, the user can add "--level $<int>$". The number of points in the numerical lattice is defined to fit the given level, with a minimum of points that fit level 3. As a higher level needs more points, a higher level than 5 will use quite a long time to run.
+To solve for a system with a koch square on another level, the user can add "--level int". Note as higher level needs more points, it will take longer to run. A level higher than 4 is not recommended.
 
-There is a possibility for the user to choose which action to do by adding the arument "--action $<string>$", with 3 different options:
+There is a possibility for the user to choose which action to do by adding the arument "--action string", with 3 different options:
 1. "initializeAndSolve", this will initialize and solve the system for the given level.
 2. "plot", this will plot and save the plots, IF the system is already solved and the raw data is saved.
 3. "all", which initialize, solve, save the raw data, plot and saves the plots for the given level. This is set to be default
@@ -45,3 +44,11 @@ The project consits of 5 python files
 3. $\verb|solving.py|$ solves the eigenvalue problem.
 4. $\verb|filehandling.py|$ has funtions to save and read the raw data.
 5. $\verb|plotting.py|$ plots the modes and the domain.
+6. $\verb|testing.py|$ testes the program.
+7. $\verb|config.py|$ contains values that should not be easily changed. Change them at your own risk.
+
+## Reference
+
+Based on:
+[V. P. Simonsen, N. Hale, I. Simonsen, *Am. J. Phys.* **92**, 115 (2024)](https://doi.org/10.1119/5.0140853)  
+Free access: [arXiv:2309.13613](https://arxiv.org/abs/2309.13613)

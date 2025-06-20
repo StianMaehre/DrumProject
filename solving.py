@@ -10,7 +10,8 @@ def solve(A, n=10):
         n (int, optional): The number of smallest eigenvalues to compute. Defaults to 10.
     
     Returns:
-        np.ndarray: The solution vector x.
+        np.ndarray: The eigenvalues of the system.
+        np.ndarray: The eigenvectors of the system.
     """
 
     n = NUMBER_OF_EIGENVALUES
